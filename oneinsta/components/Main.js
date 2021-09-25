@@ -1,30 +1,27 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 
-
+/* bottom-tab-navigator */
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons' 
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchUser } from '../redux/actions/index';
+import FeedScreen from './main/Feed';
 
+const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
     componentDidMount(){
         this.props.fetchUser();
     }
     render() {
-        const { currentUser } = this.props;
-        console.log(currentUser)
-        if(currentUser==undefined){
-            return(
-                <View></View>
-            )
-
-        }  
         return (
-            <View style={{ flex: 1, justifyContent: 'center' }}>
-                <Text>{currentUser.name} is Logged in</Text>
-            </View>
+            <Tab.Navigator>
+            <Tab.Screen name="Feed" component={FeedScreen} />
+                
+            </Tab.Navigator>
         )
     }
 }
