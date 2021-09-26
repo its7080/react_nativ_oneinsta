@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
 
 /* bottom-tab-navigator */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -9,7 +8,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchUser } from '../redux/actions/index';
 import FeedScreen from './main/Feed';
-
+import SearchScreen from './main/Search';
 import ProfileScreen from './main/Profile';
 
 
@@ -33,8 +32,14 @@ export class Main extends Component {
                         <MaterialCommunityIcons name="home" color={color} size={26} />
                     ),
             }}/>
+            <Tab.Screen name="Search" component={SearchScreen} navigation={this.props.navigation}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="magnify" color={color} size={26} />
+                    ),
+            }} />
 
-            <Tab.Screen name="AddContainer" component={EmptyScreen} navigation={this.props.navigation}
+            <Tab.Screen name="AddContainer" component={EmptyScreen}
                 listeners={({ navigation }) => ({
                     tabPress: event => {
                         event.preventDefault();
@@ -48,7 +53,7 @@ export class Main extends Component {
                     ),
             }} />
 
-            <Tab.Screen name="Profile" component={ProfileScreen} navigation={this.props.navigation}
+            <Tab.Screen name="Profile" component={ProfileScreen} 
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="account" color={color} size={26} />
